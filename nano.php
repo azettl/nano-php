@@ -7,12 +7,12 @@ final class nano{
 
 
     /**
-    * This method is used to set the template string in which 
-    * the placeholders should get replaced.
-    *
-    * @param string $sTemplate the template as string
-    * @return void
-    */
+     * This method is used to set the template string in which 
+     * the placeholders should get replaced.
+     *
+     * @param string $sTemplate the template as string
+     * @return void
+     */
     public function setTemplate(string $sTemplate) : void 
     {
       $this->_sTemplate = $sTemplate;
@@ -20,12 +20,12 @@ final class nano{
 
 
     /**
-    * This method is used to set the data array in which 
-    * the data for the placeholders is stored.
-    *
-    * @param array $aData the array containing the data
-    * @return void
-    */
+     * This method is used to set the data array in which 
+     * the data for the placeholders is stored.
+     *
+     * @param array $aData the array containing the data
+     * @return void
+     */
     public function setData(array $aData) : void 
     {
       $this->_aData = $aData;
@@ -33,12 +33,12 @@ final class nano{
 
 
     /**
-    * This method is used to set whether placeholders which could not
-    * be replaced shall remain in the output string or not.
-    *
-    * @param bool $bShowEmpty true / false
-    * @return void
-    */
+     * This method is used to set whether placeholders which could not
+     * be replaced shall remain in the output string or not.
+     *
+     * @param bool $bShowEmpty true / false
+     * @return void
+     */
     public function setShowEmpty(bool $bShowEmpty) : void 
     {
       $this->_bShowEmpty = $bShowEmpty;
@@ -46,11 +46,11 @@ final class nano{
 
 
     /**
-    * This method replaces the placeholders in the template string with
-    * the values from the data object and returns the new string.
-    *
-    * @return string   the string with the replaced placeholders
-    */
+     * This method replaces the placeholders in the template string with
+     * the values from the data object and returns the new string.
+     *
+     * @return string   the string with the replaced placeholders
+     */
     public function render() : string 
     {
       return preg_replace_callback(
@@ -62,7 +62,7 @@ final class nano{
           foreach ($aToSearch as $sKey) {
             $mValue = $aSearchIn[str_replace('()', '', $sKey)];
 
-            if($mValue && is_string($mValue)) {
+            if(is_string($mValue)) {
 
               return $mValue;
             } else if(is_object($mValue)) {
