@@ -59,11 +59,11 @@ final class nano{
 
             return $mValue;
           }else if(is_object($mValue)){
-            
+
             return $mValue();
-          }else{
-            $aSearchIn = $mValue;
           }
+          
+          $aSearchIn = $mValue;
         }
 
         return (
