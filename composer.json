@@ -1,6 +1,17 @@
 {
-  "name": "azettl/nano-php",
-  "description": "The nano-php class replaces placeholders in a string with values from an array.",
+  "name": "azettl/php-nano-template",
+  "description": "The php-nano-template class replaces placeholders in a string with values from an array.",
+  "keywords": [
+    "template", "engine"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Zettl",
+      "email": "info@azettl.net",
+      "role": "Developer"
+    }
+  ],
   "require": {
     "php": "^7.1"
   }
