@@ -5,6 +5,27 @@ final class nano{
     private $_aData      = null;
     private $_bShowEmpty = false;
 
+    public function __construct(string $sTemplate = '', array $aData = [], bool $bShowEmpty = false)
+    {
+      if($sTemplate){
+        $this->setTemplate($sTemplate);
+      }
+
+      if($aData){
+        $this->setData($aData);
+      }
+
+      if($bShowEmpty){
+        $this->setShowEmpty($bShowEmpty);
+      }
+    }
+
+    public function __destruct()
+    {
+      $this->_sTemplate  = '';
+      $this->_aData      = null;
+      $this->_bShowEmpty = false;
+    }
 
     /**
      * This method is used to set the template string in which 
@@ -60,12 +81,40 @@ final class nano{
           $aSearchIn  = $this->_aData;
 
           foreach ($aToSearch as $sKey) {
-            $mValue = $aSearchIn[str_replace('()', '', $sKey)];
+            $aParam = [];
+            $mParam = null;
+
+            if(strpos($sKey, '(') !== -1 && strpos($sKey, ')') !== -1) { 
+              $mValue = $aSearchIn[str_replace('()', '', $sKey)];
+
+              // Get method parameter, till now only one is supported
+              preg_match_all("/\((.*?)\)/",
+                $sKey, $aParam);
+
+              if($aParam && count($aParam[0]) >= 1){
+                $mParam = $aParam[1][0];
+
+                if(strpos($mParam, '"') === 0 || strpos($mParam, '\'') === 0) {
+                  $mParam = substr($mParam, 1);
+                }
+
+                if(strpos($mParam, '"') === strlen($mParam)-1 || strpos($mParam, '\'') === strlen($mParam)-1) {
+                  $mParam = substr($mParam, 0, strlen($mParam)-1);
+                }
+
+                $mValue = $aSearchIn[str_replace($aParam[0][0], '', $sKey)];
+              }
+            } else {
+              $mValue = $aSearchIn[$sKey];
+            }
 
             if(is_string($mValue)) {
 
               return $mValue;
             } else if(is_object($mValue)) {
+              if($mParam){
+                return $mValue($mParam);
+              }
 
               return $mValue();
             }

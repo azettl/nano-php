@@ -6,6 +6,26 @@ use PHPUnit\Framework\TestCase;
  */
 final class nanoTest extends TestCase
 {
+    public function testCanCallConstructToReplaceString(): void
+    {
+      $nano = new nano(
+        "<p>
+          {user.greeting()} {user.first_name} {user.last name}! 
+          Your account is <strong>{user.account.status}</strong> 
+          {user.nonexistingnode}
+        </p>",
+        $this->_getTestData()
+      );
+
+      $this->assertEquals(
+        '<p>
+          Hello Anon Ymous! 
+          Your account is <strong>active</strong> 
+          
+        </p>', 
+        $nano->render()
+      );   
+    }
 
     public function testCanReplaceString(): void
     {
@@ -24,6 +44,28 @@ final class nanoTest extends TestCase
           Hello Anon Ymous! 
           Your account is <strong>active</strong> 
           
+        </p>', 
+        $nano->render()
+      );   
+    }
+
+    public function testCanCallConstructToReplaceStringAndShowEmpty(): void
+    {
+      $nano = new nano(
+        "<p>
+          {user.greeting()} {user.first_name} {user.last name}! 
+          Your account is <strong>{user.account.status}</strong> 
+          {user.nonexistingnode}
+        </p>",
+        $this->_getTestData(),
+        true
+      );
+
+      $this->assertEquals(
+        '<p>
+          Hello Anon Ymous! 
+          Your account is <strong>active</strong> 
+          {user.nonexistingnode}
         </p>', 
         $nano->render()
       );   
@@ -97,6 +139,20 @@ final class nanoTest extends TestCase
       );   
     }
 
+    public function testCanCallConstructToReplaceStringEmptyTemplate(): void
+    {
+      $nano = new nano(
+        '',
+        $this->_getTestData(),
+        true
+      );
+
+      $this->assertEquals(
+        '', 
+        $nano->render()
+      );   
+    }
+
     public function testCanReplaceStringEmptyTemplate(): void
     {
       $nano = new nano();
@@ -141,6 +197,72 @@ final class nanoTest extends TestCase
       );   
     }
 
+    public function testCanReplaceStringWithFunctionParameterInteger(): void
+    {
+      $nano = new nano();
+      $nano->setTemplate(
+        "<p>
+          {user.function(2)} {user.first_name} {user.last name}! 
+          Your account is <strong>{user.account.status}</strong> 
+          {user.nonexistingnode}
+        </p>"
+      );
+      $nano->setData($this->_getTestData());
+
+      $this->assertEquals(
+        '<p>
+          Test2 Anon Ymous! 
+          Your account is <strong>active</strong> 
+          
+        </p>', 
+        $nano->render()
+      );   
+    }
+
+    public function testCanReplaceStringWithFunctionParameterString(): void
+    {
+      $nano = new nano();
+      $nano->setTemplate(
+        "<p>
+          {user.function('test')} {user.first_name} {user.last name}! 
+          Your account is <strong>{user.account.status}</strong> 
+          {user.nonexistingnode}
+        </p>"
+      );
+      $nano->setData($this->_getTestData());
+
+      $this->assertEquals(
+        '<p>
+          Testtest Anon Ymous! 
+          Your account is <strong>active</strong> 
+          
+        </p>', 
+        $nano->render()
+      );   
+    }
+
+    public function testCanReplaceStringWithFunctionParameterStringDoubleQuotes(): void
+    {
+      $nano = new nano();
+      $nano->setTemplate(
+        "<p>
+          {user.function(\"testing\")} {user.first_name} {user.last name}! 
+          Your account is <strong>{user.account.status}</strong> 
+          {user.nonexistingnode}
+        </p>"
+      );
+      $nano->setData($this->_getTestData());
+
+      $this->assertEquals(
+        '<p>
+          Testtesting Anon Ymous! 
+          Your account is <strong>active</strong> 
+          
+        </p>', 
+        $nano->render()
+      );   
+    }
+
     private function _getTestData(){
       return [
         "user" => [
@@ -153,6 +275,9 @@ final class nanoTest extends TestCase
           ],
           "greeting" => function(){
             return 'Hello';
+          },
+          "function" => function($param){
+            return 'Test' . $param;
           }
         ]
       ];

@@ -10,7 +10,7 @@ The nanoPHP class replaces placeholders in a string with values from an array.
 $nano = new nano();
 $nano->setTemplate(
   "<p>
-    {user.greeting()} {user.first_name} {user.last name}! 
+    {user.greeting()} {user.function(2)} {user.function('test')} {user.first_name} {user.last name}! 
     Your account is <strong>{user.account.status}</strong> 
     {user.nonexistingnode}
   </p>"
