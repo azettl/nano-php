@@ -81,18 +81,8 @@ final class nano{
         $aSearchIn  = $this->_aData;
 
         foreach ($aToSearch as $sKey) {
-          $aParam = [];
-          $mParam = null;
-
-          // Get method parameter, till now only one is supported
-          preg_match_all("/\((.*?)\)/",
-            $sKey, $aParam);
-
-          if($aParam && count($aParam[0]) >= 1){
-            $mParam = $this->formatFunctionParameterValue($aParam[1][0]);
-          }
-          
-          $mValue = $aSearchIn[str_replace($aParam[0][0], '', $sKey)];
+          list($sFormattedKey, $mParam) = $this->getFunctionNameAndParameter($sKey);
+          $mValue = $aSearchIn[$sFormattedKey];
 
           if(is_string($mValue)) {
 
@@ -119,6 +109,21 @@ final class nano{
       },
       $this->_sTemplate
     );
+  }
+
+  private function getFunctionNameAndParameter($sKey) : array
+  {
+    // Get method parameter, till now only one is supported
+    preg_match_all("/\((.*?)\)/", $sKey, $aParam);
+
+    $mParam = null;
+    if($aParam && count($aParam[0]) >= 1){
+      $mParam = $this->formatFunctionParameterValue($aParam[1][0]);
+    }
+
+    return [
+      str_replace($aParam[0][0], '', $sKey), $mParam
+    ];
   }
 
   private function formatFunctionParameterValue($mValue) : string
