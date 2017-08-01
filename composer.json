@@ -1,0 +1,7 @@
+{
+  "name": "azettl/nanoPHP",
+  "description": "The nanoPHP class replaces placeholders in a string with values from an array.",
+  "require": {
+    "php": "^7.1"
+  }
+}
