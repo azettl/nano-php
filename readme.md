@@ -4,6 +4,12 @@
 
 The php-nano-template class replaces placeholders in a string with values from an array.
 
+## Installation
+
+```cmd
+composer require azettl/php-nano-template
+```
+
 ## Usage
 
 ```php
@@ -48,6 +54,18 @@ $nano = new com\azettl\nano\nano(
     ]
   ]
 );
+
+echo $nano->render(); 
+```
+
+or
+
+```php
+$nano = new com\azettl\nano\nano();
+$nano->setTemplateFile(
+  "tests/template.html"
+);
+$nano->setData($aData);
 
 echo $nano->render(); 
 ```
