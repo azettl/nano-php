@@ -149,14 +149,9 @@ final class nano{
   {
     preg_match_all("/\((.*?)\)/", $sKey, $aParam);
 
-    $mParam = null;
-    if($aParam && count($aParam[0]) >= 1){
-      $mParam = $this->formatFunctionParameterValue($aParam[1][0]);
-    }
-
     return [
       str_replace($aParam[0][0], '', $sKey), 
-      $mParam
+      $this->formatFunctionParameterValue($aParam[1][0])
     ];
   }
 
@@ -166,11 +161,12 @@ final class nano{
    * end of the passed string. 
    *
    * @param string $mValue   the value which needs to get formatted
-   * @return string
+   * @return mixed           string if a parameter is available, null if not
    */
-  private function formatFunctionParameterValue($mValue) : string
+  private function formatFunctionParameterValue($mValue)
   {
-    preg_match_all('/^(["\']).*\1$/m', $mValue, $aParam);
+    preg_match_all('/^(["\'])/', $mValue, $aParam);
+    
     if($aParam && count($aParam[0]) >= 1){
       $mValue = substr($mValue, 1, strlen($mValue)-2);
     }
