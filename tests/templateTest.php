@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers nano
  */
-final class nanoTest extends TestCase
+final class templateTest extends TestCase
 {
     public function testCanCallConstructToReplaceString(): void
     {
