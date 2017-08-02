@@ -223,6 +223,41 @@ final class nanoTest extends TestCase
       );   
     }
 
+    public function testCanGetTemplate(): void
+    {
+      $nano = new nano();
+      $nano->setTemplate(
+        "Test"
+      );
+
+      $this->assertEquals(
+        'Test', 
+        $nano->getTemplate()
+      );   
+    }
+
+    public function testCanGetData(): void
+    {
+      $nano = new nano();
+      $nano->setData($this->_getTestData());
+
+      $this->assertEquals(
+        $this->_getTestData(), 
+        $nano->getData()
+      );   
+    }
+
+    public function testCanGetShowEmpty(): void
+    {
+      $nano = new nano();
+      $nano->setShowEmpty(true);
+
+      $this->assertEquals(
+        true, 
+        $nano->getShowEmpty()
+      );   
+    }
+
     private function _getTestData(){
       return [
         "user" => [

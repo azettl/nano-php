@@ -9,7 +9,7 @@
 final class nano{
 
   private $_sTemplate  = '';
-  private $_aData      = null;
+  private $_aData      = [];
   private $_bShowEmpty = false;
 
 
@@ -45,7 +45,7 @@ final class nano{
   public function __destruct()
   {
     $this->_sTemplate  = '';
-    $this->_aData      = null;
+    $this->_aData      = [];
     $this->_bShowEmpty = false;
   }
 
@@ -63,6 +63,17 @@ final class nano{
 
 
   /**
+   * This method is used to return the current template string.
+   *
+   * @return string
+   */
+  public function getTemplate() : string 
+  {
+    return $this->_sTemplate;
+  }
+
+
+  /**
    * This method is used to set the data array in which 
    * the data for the placeholders is stored.
    *
@@ -72,6 +83,17 @@ final class nano{
   public function setData(array $aData) : void 
   {
     $this->_aData = $aData;
+  }
+
+
+  /**
+   * This method is used to get the current data array.
+   *
+   * @return array
+   */
+  public function getData() : array 
+  {
+    return $this->_aData;
   }
 
 
@@ -89,6 +111,18 @@ final class nano{
 
 
   /**
+   * This method is used to get the current show empty placeholder
+   * status.
+   *
+   * @return bool
+   */
+  public function getShowEmpty() : bool 
+  {
+    return $this->_bShowEmpty;
+  }
+
+
+  /**
    * This method replaces the placeholders in the template string with
    * the values from the data object and returns the new string.
    *
@@ -100,7 +134,7 @@ final class nano{
       '/{(.*?)}/',
       function ($aResult){
         $aToSearch  = explode('.', $aResult[1]);
-        $aSearchIn  = $this->_aData;
+        $aSearchIn  = $this->getData();
 
         foreach ($aToSearch as $sKey) {
           list(
@@ -125,14 +159,14 @@ final class nano{
         }
 
         return (
-          $this->_bShowEmpty 
+          $this->getShowEmpty() 
           ? 
           $aResult[0] 
           : 
           ''
         );
       },
-      $this->_sTemplate
+      $this->getTemplate()
     );
 
     return preg_replace('/^\s+|\n|\r|\t|\s+!/m', '', $sOutput);
