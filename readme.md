@@ -13,7 +13,7 @@ composer require azettl/php-nano-template
 ## Usage
 
 ```php
-$nano = new com\azettl\nano\nano();
+$nano = new com\azettl\nano\template();
 $nano->setTemplate(
   "<p>
     {user.greeting()} {user.function(2)} {user.function('test')} {user.first_name} {user.last name}! 
@@ -30,7 +30,7 @@ echo $nano->render();
 or
 
 ```php
-$nano = new com\azettl\nano\nano(
+$nano = new com\azettl\nano\template(
   "<p>
     {user.greeting()} {user.first_name} {user.last name}! 
     Your account is <strong>{user.account.status}</strong> 
@@ -61,7 +61,7 @@ echo $nano->render();
 or
 
 ```php
-$nano = new com\azettl\nano\nano();
+$nano = new com\azettl\nano\template();
 $nano->setTemplateFile(
   "tests/template.html"
 );

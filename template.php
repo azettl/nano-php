@@ -9,7 +9,7 @@ namespace com\azettl\nano;
  * @author   Andreas Zettl <info@azettl.net>
  * @see      https://github.com/azettl/php-nano-template
  */
-final class nano{
+final class template{
 
   private $_sTemplate  = '';
   private $_aData      = [];
