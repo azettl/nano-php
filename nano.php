@@ -170,13 +170,9 @@ final class nano{
    */
   private function formatFunctionParameterValue($mValue) : string
   {
-    if(strpos($mValue, '"') === 0 || strpos($mValue, '\'') === 0) {
-      $mValue = substr($mValue, 1);
-    }
-
-    $iValLen = strlen($mValue)-1;
-    if(strpos($mValue, '"') === $iValLen || strpos($mValue, '\'') === $iValLen) {
-      $mValue = substr($mValue, 0, $iValLen);
+    preg_match_all('/^(["\']).*\1$/m', $mValue, $aParam);
+    if($aParam && count($aParam[0]) >= 1){
+      $mValue = substr($mValue, 1, strlen($mValue)-2);
     }
 
     return $mValue;
