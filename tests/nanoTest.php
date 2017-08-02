@@ -41,6 +41,46 @@ final class nanoTest extends TestCase
       );   
     }
 
+    public function testCanSetTemplateFile(): void
+    {
+      $nano = new nano();
+      $nano->setTemplateFile(
+        "tests/template.html"
+      );
+
+      $this->assertEquals(
+        '<p>
+  {user.greeting()} {user.first_name} {user.last name}! 
+  Your account is <strong>{user.account.status}</strong> 
+  {user.nonexistingnode}
+</p>', 
+        $nano->getTemplate()
+      );   
+    }
+
+    public function testThrowsErrorWithInvalidTemplateFile(): void
+    {
+      $this->expectException(Exception::class);
+      $nano = new nano();
+      $nano->setTemplateFile(
+        "tests/template.invalid.html"
+      );
+    }
+
+    public function testCanSetTemplateFileAndReplaceString(): void
+    {
+      $nano = new nano();
+      $nano->setTemplateFile(
+        "tests/template.html"
+      );
+      $nano->setData($this->_getTestData());
+
+      $this->assertEquals(
+        '<p>Hello Anon Ymous! Your account is <strong>active</strong> </p>', 
+        $nano->render()
+      );   
+    }
+
     public function testCanCallConstructToReplaceStringAndShowEmpty(): void
     {
       $nano = new nano(

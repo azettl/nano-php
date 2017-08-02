@@ -49,6 +49,7 @@ final class nano{
     $this->_bShowEmpty = false;
   }
 
+
   /**
    * This method is used to set the template string in which 
    * the placeholders should get replaced.
@@ -59,6 +60,25 @@ final class nano{
   public function setTemplate(string $sTemplate) : void 
   {
     $this->_sTemplate = $sTemplate;
+  }
+
+
+  /**
+   * This method is used to set the template from a relative
+   * path.
+   *
+   * @param string $sRelativePathToFile  the relative path to the template
+   * @throws Exception                   if the file is not found
+   * @return void
+   */
+  public function setTemplateFile(string $sRelativePathToFile) : void
+  {
+    if(is_file($sRelativePathToFile)) {
+      $sFileContent = file_get_contents($sRelativePathToFile);
+      $this->setTemplate($sFileContent);
+    } else {
+      throw new Exception('Template file not found.');
+    }
   }
 
 
@@ -133,8 +153,8 @@ final class nano{
     $sOutput = preg_replace_callback(
       '/{(.*?)}/',
       function ($aResult){
-        $aToSearch  = explode('.', $aResult[1]);
-        $aSearchIn  = $this->getData();
+        $aToSearch = explode('.', $aResult[1]);
+        $aSearchIn = $this->getData();
 
         foreach ($aToSearch as $sKey) {
           list(
