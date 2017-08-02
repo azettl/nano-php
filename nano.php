@@ -96,7 +96,7 @@ final class nano{
    */
   public function render() : string 
   {
-    return preg_replace_callback(
+    $sOutput = preg_replace_callback(
       '/{(.*?)}/',
       function ($aResult){
         $aToSearch  = explode('.', $aResult[1]);
@@ -134,6 +134,8 @@ final class nano{
       },
       $this->_sTemplate
     );
+
+    return preg_replace('/^\s+|\n|\r|\t|\s+!/m', '', $sOutput);
   }
 
 

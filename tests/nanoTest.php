@@ -18,11 +18,7 @@ final class nanoTest extends TestCase
       );
 
       $this->assertEquals(
-        '<p>
-          Hello Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Hello Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
@@ -40,11 +36,7 @@ final class nanoTest extends TestCase
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
-        '<p>
-          Hello Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Hello Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
@@ -62,11 +54,7 @@ final class nanoTest extends TestCase
       );
 
       $this->assertEquals(
-        '<p>
-          Hello Anon Ymous! 
-          Your account is <strong>active</strong> 
-          {user.nonexistingnode}
-        </p>', 
+        '<p>Hello Anon Ymous! Your account is <strong>active</strong> {user.nonexistingnode}</p>', 
         $nano->render()
       );   
     }
@@ -85,11 +73,7 @@ final class nanoTest extends TestCase
       $nano->setShowEmpty(true);
 
       $this->assertEquals(
-        '<p>
-          Hello Anon Ymous! 
-          Your account is <strong>active</strong> 
-          {user.nonexistingnode}
-        </p>', 
+        '<p>Hello Anon Ymous! Your account is <strong>active</strong> {user.nonexistingnode}</p>', 
         $nano->render()
       );   
     }
@@ -107,11 +91,7 @@ final class nanoTest extends TestCase
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
-        '<p>
-           Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
@@ -130,11 +110,7 @@ final class nanoTest extends TestCase
       $nano->setShowEmpty(true);
 
       $this->assertEquals(
-        '<p>
-          {user.greetingTwo()} Anon Ymous! 
-          Your account is <strong>active</strong> 
-          {user.nonexistingnode}
-        </p>', 
+        '<p>{user.greetingTwo()} Anon Ymous! Your account is <strong>active</strong> {user.nonexistingnode}</p>', 
         $nano->render()
       );   
     }
@@ -178,11 +154,7 @@ final class nanoTest extends TestCase
       $nano->setShowEmpty(true);
 
       $this->assertEquals(
-        "<p>
-          {user.greeting()} {user.first_name} {user.last name}! 
-          Your account is <strong>{user.account.status}</strong> 
-          {user.nonexistingnode}
-        </p>", 
+        "<p>{user.greeting()} {user.first_name} {user.last name}! Your account is <strong>{user.account.status}</strong> {user.nonexistingnode}</p>", 
         $nano->render()
       );   
     }
@@ -210,11 +182,7 @@ final class nanoTest extends TestCase
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
-        '<p>
-          Test2 Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Test2 Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
@@ -232,11 +200,7 @@ final class nanoTest extends TestCase
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
-        '<p>
-          Testtest Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Testtest Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
@@ -254,11 +218,7 @@ final class nanoTest extends TestCase
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
-        '<p>
-          Testtesting Anon Ymous! 
-          Your account is <strong>active</strong> 
-          
-        </p>', 
+        '<p>Testtesting Anon Ymous! Your account is <strong>active</strong> </p>', 
         $nano->render()
       );   
     }
