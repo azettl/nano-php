@@ -1,4 +1,7 @@
 <?php
+
+namespace com\azettl\nano;
+
 /**
  * The php-nano-template class replaces placeholders in a string with values from an array.
  *
@@ -73,12 +76,12 @@ final class nano{
    */
   public function setTemplateFile(string $sRelativePathToFile) : void
   {
-    if(is_file($sRelativePathToFile)) {
-      $sFileContent = file_get_contents($sRelativePathToFile);
-      $this->setTemplate($sFileContent);
-    } else {
-      throw new Exception('Template file not found.');
+    if(!is_file($sRelativePathToFile)) {
+      throw new \Exception('Template file not found.');
     }
+    
+    $sFileContent = file_get_contents($sRelativePathToFile);
+    $this->setTemplate($sFileContent);
   }
 
 
@@ -136,7 +139,7 @@ final class nano{
    *
    * @return bool
    */
-  public function getShowEmpty() : bool 
+  public function hasShowEmpty() : bool 
   {
     return $this->_bShowEmpty;
   }
@@ -179,7 +182,7 @@ final class nano{
         }
 
         return (
-          $this->getShowEmpty() 
+          $this->hasShowEmpty() 
           ? 
           $aResult[0] 
           : 

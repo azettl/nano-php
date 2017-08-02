@@ -8,7 +8,7 @@ final class nanoTest extends TestCase
 {
     public function testCanCallConstructToReplaceString(): void
     {
-      $nano = new nano(
+      $nano = new com\azettl\nano\nano(
         "<p>
           {user.greeting()} {user.first_name} {user.last name}! 
           Your account is <strong>{user.account.status}</strong> 
@@ -25,7 +25,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceString(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.greeting()} {user.first_name} {user.last name}! 
@@ -43,7 +43,7 @@ final class nanoTest extends TestCase
 
     public function testCanSetTemplateFile(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplateFile(
         "tests/template.html"
       );
@@ -61,7 +61,7 @@ final class nanoTest extends TestCase
     public function testThrowsErrorWithInvalidTemplateFile(): void
     {
       $this->expectException(Exception::class);
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplateFile(
         "tests/template.invalid.html"
       );
@@ -69,7 +69,7 @@ final class nanoTest extends TestCase
 
     public function testCanSetTemplateFileAndReplaceString(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplateFile(
         "tests/template.html"
       );
@@ -83,7 +83,7 @@ final class nanoTest extends TestCase
 
     public function testCanCallConstructToReplaceStringAndShowEmpty(): void
     {
-      $nano = new nano(
+      $nano = new com\azettl\nano\nano(
         "<p>
           {user.greeting()} {user.first_name} {user.last name}! 
           Your account is <strong>{user.account.status}</strong> 
@@ -101,7 +101,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringAndShowEmpty(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.greeting()} {user.first_name} {user.last name}! 
@@ -120,7 +120,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringWithUnknownFunction(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.greetingTwo()} {user.first_name} {user.last name}! 
@@ -138,7 +138,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringAndShowEmptyWithUnknownFunction(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.greetingTwo()} {user.first_name} {user.last name}! 
@@ -157,7 +157,7 @@ final class nanoTest extends TestCase
 
     public function testCanCallConstructToReplaceStringEmptyTemplate(): void
     {
-      $nano = new nano(
+      $nano = new com\azettl\nano\nano(
         '',
         $this->_getTestData(),
         true
@@ -171,7 +171,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringEmptyTemplate(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setData($this->_getTestData());
       $nano->setShowEmpty(true);
 
@@ -183,7 +183,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringEmptyData(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.greeting()} {user.first_name} {user.last name}! 
@@ -201,7 +201,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringAllEmpty(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
 
       $this->assertEquals(
         '', 
@@ -211,7 +211,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringWithFunctionParameterInteger(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.function(2)} {user.first_name} {user.last name}! 
@@ -229,7 +229,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringWithFunctionParameterString(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.function('test')} {user.first_name} {user.last name}! 
@@ -247,7 +247,7 @@ final class nanoTest extends TestCase
 
     public function testCanReplaceStringWithFunctionParameterStringDoubleQuotes(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "<p>
           {user.function(\"testing\")} {user.first_name} {user.last name}! 
@@ -265,7 +265,7 @@ final class nanoTest extends TestCase
 
     public function testCanGetTemplate(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setTemplate(
         "Test"
       );
@@ -278,7 +278,7 @@ final class nanoTest extends TestCase
 
     public function testCanGetData(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setData($this->_getTestData());
 
       $this->assertEquals(
@@ -289,12 +289,12 @@ final class nanoTest extends TestCase
 
     public function testCanGetShowEmpty(): void
     {
-      $nano = new nano();
+      $nano = new com\azettl\nano\nano();
       $nano->setShowEmpty(true);
 
       $this->assertEquals(
         true, 
-        $nano->getShowEmpty()
+        $nano->hasShowEmpty()
       );   
     }
 
