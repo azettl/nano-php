@@ -191,8 +191,8 @@ final class nano{
       },
       $this->getTemplate()
     );
-
-    return preg_replace('/^\s+|\n|\r|\t|\s+!/m', '', $sOutput);
+    
+    return preg_replace('/^\s+|\n|\r|\t/m', '', $sOutput);
   }
 
 
