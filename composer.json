@@ -15,6 +15,9 @@
   "require": {
     "php": "^7.1"
   },
+  "require-dev": {
+      "codacy/coverage": "dev-master"
+  },
   "autoload": {
     "classmap": ["template.php"]
   }

@@ -2,7 +2,7 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers nano
+ * @covers com\azettl\nano\template
  */
 final class templateTest extends TestCase
 {
