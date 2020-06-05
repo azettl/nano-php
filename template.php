@@ -192,7 +192,7 @@ final class template{
       $this->getTemplate()
     );
     
-    return preg_replace('/^\s+|\n|\r|\t/m', '', $sOutput);
+    return $sOutput;
   }
 
 
