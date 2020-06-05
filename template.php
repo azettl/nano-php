@@ -208,6 +208,13 @@ final class template{
   {
     preg_match_all("/\((.*?)\)/", $sKey, $aParam);
 
+    if(!isset($aParam[0]) || count($aParam[0]) < 2){
+      return [
+        $sKey,
+        ''
+      ];
+    }
+
     return [
       str_replace($aParam[0][0], '', $sKey), 
       preg_replace('/^["\'](.*)["\']$/m', '$1', $aParam[1][0]) // remove quotes
